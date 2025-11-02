@@ -1,0 +1,59 @@
+<div class="container">
+  <h1>Welcome to Auth App</h1>
+  
+  <div *ngIf="user$ | async as user; else loginRegister">
+    <h3>Welcome, {{ user.email }}!</h3>
+    <button (click)="signOut()">Sign Out</button>
+  </div>
+
+  <ng-template #loginRegister>
+    <div class="auth-container">
+      <!-- Login Form -->
+      <div class="form-section">
+        <h2>Login</h2>
+        <form (ngSubmit)="onLogin()">
+          <input 
+            type="email" 
+            [(ngModel)]="loginEmail" 
+            name="loginEmail"
+            placeholder="Email" 
+            required
+          >
+          <input 
+            type="password" 
+            [(ngModel)]="loginPassword" 
+            name="loginPassword"
+            placeholder="Password" 
+            required
+          >
+          <button type="submit">Login</button>
+        </form>
+        <p *ngIf="loginError" class="error">{{ loginError }}</p>
+      </div>
+
+      <!-- Register Form -->
+      <div class="form-section">
+        <h2>Register</h2>
+        <form (ngSubmit)="onRegister()">
+          <input 
+            type="email" 
+            [(ngModel)]="registerEmail" 
+            name="registerEmail"
+            placeholder="Email" 
+            required
+          >
+          <input 
+            type="password" 
+            [(ngModel)]="registerPassword" 
+            name="registerPassword"
+            placeholder="Password" 
+            required
+          >
+          <button type="submit">Register</button>
+        </form>
+        <p *ngIf="registerError" class="error">{{ registerError }}</p>
+        <p *ngIf="registerSuccess" class="success">{{ registerSuccess }}</p>
+      </div>
+    </div>
+  </ng-template>
+</div>
